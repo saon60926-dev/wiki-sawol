@@ -1,0 +1,513 @@
+<style>
+:root {
+    --wiki-main-color: #ffe852; 
+    --wiki-text-color: #ffffff;
+    --wiki-link-color: #0275d8;
+    --wiki-border-color: #ddd;
+    --wiki-bg-gray: #eee;
+    --wiki-max-width: 700px;
+    --wiki-font-size: 15px;
+    --wiki-line-height: 1.5;
+}
+
+#wikiwrap {
+    --wiki-main-color: #ffe852; 
+}
+
+.wiki-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.wiki-main-table {
+    order: 1;
+}
+
+.wiki-index {
+    order: 2;
+}
+
+@media (min-width: 768px) {
+    .wiki-container {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .wiki-index {
+        order: 1;
+        flex: 0 0 250px;
+        top: 20px;
+    }
+
+    .wiki-main-table {
+        order: 2;
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+#wikiwrap {
+    font-family: "Pretendard JP Variable", "Pretendard JP", "Pretendard", Pretendard, 
+                 -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", 
+                 "Segoe UI", "Hiragino Sans", "Apple SD Gothic Neo", Meiryo, 
+                 "Noto Sans JP", "Noto Sans KR", "Malgun Gothic", Osaka, 
+                 "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    box-sizing: border-box;
+    font-size: var(--wiki-font-size);
+    line-height: var(--wiki-line-height);
+    max-width: var(--wiki-max-width);
+    margin: 0 auto;
+}
+
+#wikiwrap a,
+.text1 a,
+.wiki-category a,
+.wiki-index a {
+    color: var(--wiki-link-color) !important;
+    text-decoration: none;
+}
+
+#wikiwrap a::before,
+#wikiwrap a::after,
+.text1 a::before,
+.wiki-category a::before,
+.wiki-index a::before {
+    content: none !important;
+}
+
+.wiki-main-table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 2px solid var(--wiki-main-color);
+    font-size: 0.96em;
+    line-height: var(--wiki-line-height);
+    margin: 20px 0 16px;
+}
+
+.wt-name {
+    padding: 5px 10px;
+    border: 2px solid var(--wiki-main-color);
+    text-align: center;
+    background-color: var(--wiki-main-color);
+    color: var(--wiki-text-color);
+}
+
+.wt-copyright {
+    padding: 5px 10px;
+    border: 1px solid var(--wiki-border-color);
+    text-align: center;
+    color: #000;
+}
+
+.wt-color {
+    width: 30%;
+    padding: 5px 10px;
+    border: 1px solid var(--wiki-border-color);
+    border-right: 1px solid var(--wiki-border-color);
+    border-bottom: 1px solid var(--wiki-border-color);
+    text-align: center;
+    background-color: var(--wiki-main-color);
+    color: var(--wiki-text-color);
+}
+
+.wt-detail {
+    padding: 5px 10px;
+    border: 1px solid var(--wiki-border-color);
+    border-bottom: 1px solid var(--wiki-border-color);
+    text-align: left;
+    color: #000;
+}
+
+.wiki-main-table tr:last-child > td {
+    border-bottom: none;
+}
+
+summary {
+    list-style-type: none;
+    opacity: 0.5;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+summary::-webkit-details-marker {
+    display: none;
+}
+
+details[open] summary {
+    opacity: 1;
+}
+
+.wiki-h1-icon ion-icon,
+.wiki-h2-icon ion-icon,
+.wiki-h3-icon ion-icon {
+    transition: transform 0.3s ease;
+    transform: rotate(-90deg);
+}
+
+details[open] .wiki-h1-icon ion-icon,
+details[open] .wiki-h2-icon ion-icon,
+details[open] .wiki-h3-icon ion-icon {
+    transform: rotate(0deg);
+}
+
+.text1 {
+    font-size: var(--wiki-font-size);
+    line-height: var(--wiki-line-height);
+}
+
+.wiki-category {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: normal;
+    line-height: var(--wiki-line-height);
+    margin: 0 0 1em;
+    padding: 0.2rem 0.5rem;
+}
+
+.wiki-h1 {
+    font-size: 1.8em;
+    border-bottom: 1px solid #ccc;
+    margin: 1.2em 0 0.7em;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+
+.wiki-h2 {
+    font-size: 1.6em;
+    border-bottom: 1px solid #ccc;
+    margin: 1.2em 0 0.7em;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+
+.wiki-h3 {
+    font-size: 1.4em;
+    border-bottom: 1px solid #ccc;
+    margin: 1.2em 0 0.7em;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+
+.wiki-h1-icon,
+.wiki-h2-icon,
+.wiki-h3-icon {
+    color: #666;
+    float: left;
+    font-weight: 400;
+    line-height: 1em;
+    text-align: center;
+    width: 0.9em;
+    margin-right: 0.4em;
+    margin-top: 0.2em;
+}
+
+.wiki-index {
+    border-collapse: collapse;
+    width: auto;
+    max-width: 250px;
+    border: 1px solid #ccc;
+    margin: 0 0 20px 5px;
+    line-height: 1.8;
+}
+
+.wiki-quote {
+    border-collapse: collapse;
+    width: auto;
+    height: auto;
+    margin: 1em 0;
+}
+
+.wiki-quote td {
+    width: 100%;
+    border: 2px dashed #ccc;
+    border-left: 5px solid var(--wiki-main-color);
+    background: var(--wiki-bg-gray);
+    padding: 1em;
+    line-height: 1.6;
+}
+
+.wiki-quote hr {
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 0.5em 0;
+}
+
+.wiki-footnote {
+    border-top: 1px solid #777;
+    margin: 1.5em 0;
+    padding: 0.5em 0;
+    font-size: 0.9em;
+}
+.wiki-footnote p {
+    margin: 5px 0;
+}
+
+.wikigreenicon {
+    background: green;
+    color: white;
+    padding: 0 0.08em;
+    font-size: var(--wiki-font-size);
+    vertical-align: middle;
+}
+
+.wikigreentext {
+    color: green;
+    vertical-align: middle;
+    font-size: var(--wiki-font-size);
+    line-height: var(--wiki-line-height);
+}
+
+.wikigreen:hover {
+    text-decoration: underline;
+    text-decoration-color: green;
+}
+
+.wiki-img-sing {
+    width: 100%;
+    margin: 1em 0;
+    border-collapse: collapse;
+    line-height: 0;
+}
+
+.wiki-img-sing td {
+    padding: 0;
+    border: 2px solid var(--wiki-main-color);
+}
+
+.wiki-img-sing img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.wiki-img-sing iframe {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border-radius: 0;
+    box-shadow: none;
+}
+.wiki-img-sing iframe[src*="youtube.com"] {
+    border-radius: 0 !important;
+}
+.wiki-fn-link {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none !important;
+}
+.wiki-fn-tooltip {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px 12px;
+    width: max-content;
+    max-width: 250px;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: left;
+    white-space: normal;
+    margin-bottom: 8px; 
+    
+    font-size: calc(var(--wiki-font-size) * 0.9);
+    line-height: var(--wiki-line-height);
+    font-weight: normal !important;
+}
+
+.wiki-fn-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #ccc transparent transparent transparent; 
+}
+
+@media (min-width: 768px) {
+    .wiki-fn-link:hover .wiki-fn-tooltip {
+        display: block;
+    }
+}
+
+.wiki-modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 99998;
+}
+.wiki-modal-overlay.active {
+    display: block;
+}
+.wiki-modal-box {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    width: 80%;
+    max-width: 300px;
+    z-index: 99999;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    
+    font-size: calc(var(--wiki-font-size) * 0.9);
+    line-height: var(--wiki-line-height);
+    font-weight: normal !important;
+}
+</style>
+<div id="wikiwrap">
+  <p class="wiki-category">분류: <span style="color: #0275d8">Fearless｜S급｜가이드</span></p>
+  
+  <div class="wiki-container">
+    <table class="wiki-main-table">
+      <tbody>
+        <tr>
+          <td class="wt-name" colspan="2">
+            <b><span style="font-size: 20px;">이사월</span></b><br />
+            <b><span style="font-size: 13px; line-height: 180%;"><ruby>李娑月<rt></rt></ruby> ｜ Lee Sa-wol</span></b>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="padding: 0; border: 2px solid var(--wiki-main-color); border-bottom: var(--wiki-border-color);">
+            <div style="text-align: center;">
+              <img src="https://i.imgur.com/IaOgvhT.png" width="100%" style="display:block;" />
+            </div>
+          </td>
+        </tr>
+        
+        <tr><td class="wt-color">출생</td><td class="wt-detail">4월 2일 (23세)</td></tr>
+<tr><td class="wt-color">국적</td><td class="wt-detail">대한민국</td></tr>
+<tr><td class="wt-color">소속</td><td class="wt-detail">Fearless</td></tr>
+<tr><td class="wt-color">코드네임</td><td class="wt-detail">에이프릴 (April)</td></tr>
+<tr><td class="wt-color">신체</td><td class="wt-detail">195cm｜89kg｜AB형｜290mm</td></tr>
+<tr><td class="wt-color">가족</td><td class="wt-detail">어머니｜아버지｜형</td></tr>
+<tr><td class="wt-color">종교</td><td class="wt-detail">무종교</td></tr>
+
+      </tbody>
+    </table>
+    
+        <table class="wiki-index">
+        <tbody>
+        <tr style="padding: 0 20px;">
+        <td style="width: 100%; margin-left: 5px; padding: 12px 20px 18px 20px; font-size: .95rem; line-height: 1.5;">
+        <a name="목차"></a><span style="font-size: 1.25em; margin-left: -5px;">목차</span><br />
+        <a style="padding-left: 0px;" href="#목차1-">1.</a> 개요<br />
+<a style="padding-left: 0px;" href="#목차2-">2.</a> 능력<br />
+<a style="padding-left: 20px;" href="#목차2-1">2.1</a> 가이딩 특징<br />
+<a style="padding-left: 20px;" href="#목차2-2">2.2</a> 궁합 및 상성<br />
+<a style="padding-left: 0px;" href="#목차3-">3.</a> 성격<br />
+<a style="padding-left: 20px;" href="#목차3-1">3.1</a> 기본 성향&nbsp;<br />
+<a style="padding-left: 20px;" href="#목차3-2">3.2</a> 태도<br />
+<a style="padding-left: 0px;" href="#목차4-">4.</a> 주변 인물<br />
+<a style="padding-left: 20px;" href="#목차4-1">4.1</a> 머스탱 (서재훈)<br />
+<a style="padding-left: 20px;" href="#목차4-2">4.2</a> 이베르 (이사운)<br />
+<a style="padding-left: 20px;" href="#목차4-3">4.3</a> 비올레 (백강우)<br />
+<a style="padding-left: 20px;" href="#목차4-4">4.4</a> 기타 인물<br />
+<a style="padding-left: 0px;" href="#목차5-">5.</a> 행적<br />
+<a style="padding-left: 20px;" href="#목차5-1">5.1</a> 과거<br />
+<a style="padding-left: 20px;" href="#목차5-2">5.2</a> 주요 사건<br />
+
+        </td></tr></tbody></table>
+  </div>
+  <details open><summary class="text1"><h2 class="wiki-h1"><span class="wiki-h1-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차1-"></a><a href="#목차">1.</a> 개요</h2></summary>
+<p class="text1"><span style="color: rgb(3, 117, 216);">대한민국</span> 출신의 <span style="color: rgb(2, 117, 216);">가이드</span>이자 <span style="color: rgb(2, 117, 216);">Fearless </span>한국지부 소속 <span style="color: rgb(2, 117, 216);">S급</span> 가이드. </p>
+</details>
+<details open><summary class="text1"><h2 class="wiki-h1"><span class="wiki-h1-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차2-"></a><a href="#목차">2.</a> 능력</h2></summary>
+<p class="text1"><span style="font-size: 0.95em;">높은 동기화율과 안정적인 <span style="color: rgb(2, 117, 216);">가이딩</span> 능력을 보유한 S급 가이드.&nbsp;</span><span style="font-size: 0.95em;">주로 신체 접촉과 시선 유도를 기반으로 한 가이딩을 사용하며, 대상의 긴장을 완화하고 감정을 안정시키는 데 특화되어 있다.</span><div><span style="font-size: 0.95em;"><br></span></div><div>특히 첫 가이딩 대상으로 악명 높은 <span style="color: rgb(2, 117, 216);">센티넬</span>, <span style="color: rgb(2, 117, 216);">머스탱</span><a name="돌아가기1"></a><a href="#각주1" class="wiki-fn-link" onclick="openWikiModal(event, this)"><sup>[1]</sup><span class="wiki-fn-tooltip"><span style="color: var(--wiki-link-color);">[1]</span> <span style="color: #333;">S급 센티넬로, 부유 전함 VALKYRIE를 운용하는 단독 전투 특화형 능력자이다.</span></span></a>을 안정적으로 제어한 사례로 주목받았다. 이에 대해 일각에서는 해당 인물이 실제로는 이전부터 가이딩 경험을 축적해온 것이 아니냐는 추측 역시 제기되고 있다<span style="font-size: 0.95em;"></span></div></p>
+</details>
+<details open><summary class="text1"><h2 class="wiki-h2"><span class="wiki-h2-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차2-1"></a><a href="#목차">2.1</a> 가이딩 특징</h2></summary>
+<p class="text1"><p data-start="231" data-end="357">가이딩 과정은 비교적 정적인 편으로, 상대방과 시선을 맞춘 뒤 눈을 감게 하고, 뺨을 가볍게 두드리며 감각을 완만하게 유도한다. 이후 이마를 맞댄 상태에서 진행되는 가이딩은 대상에게 심리적 안정감을 부여하는 것이 특징이다.</p><p data-start="231" data-end="357"><br></p><p data-start="365" data-end="430">전반적인 가이딩의 체감은 ‘포근한 봄’에 비유되며, 과도한 자극 없이 서서히 안정 상태로 이끄는 타입으로 평가받는다.</p></p>
+</details>
+<details open><summary class="text1"><h2 class="wiki-h2"><span class="wiki-h2-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차2-2"></a><a href="#목차">2.2</a> 궁합 및 상성</h2></summary>
+<p class="text1"><p data-start="425" data-end="518">저자극형 가이딩 특성상 즉각적인 출력 상승보다는 안정화 및 유지에 강점을 보인다.</p><p data-start="425" data-end="518"><br></p><p data-start="425" data-end="518">공격적인 성향의 <span style="color: rgb(2, 117, 216);">센티넬</span>과 조합될 경우 전투 지속력이 크게 향상되는 경향을 보인다고 알려져 있으나,&nbsp;<span style="font-size: 0.95em;">현재까지 확인된 바로는 S급 센티넬, 머스탱과의 전속 파트너십을 유지하고 있으며,&nbsp;</span><span style="font-size: 0.95em;">타 대상과의 가이딩 사례는 보고된 바가 없다.</span><span style="font-size: 0.95em;"><a name="돌아가기2"></a><a href="#각주2" class="wiki-fn-link" onclick="openWikiModal(event, this)"><sup>[2]</sup><span class="wiki-fn-tooltip"><span style="color: var(--wiki-link-color);">[2]</span> <span style="color: #333;"></span>16세라는 이른 나이에 능력이 발현된 이후, S급 자질을 지닌 인물로 평가받으며 지부장 K의 보호 및 지도 아래 성장한 것으로 알려져 있다. 이후 23세에 이르러 머스탱과의 페어가 성립되며, 본격적인 전속 가이딩이 시작된 것으로 보인다.<span style="font-size: 0.95em;"></span></span></a>&nbsp;</span></p></p>
+</details>
+<details open><summary class="text1"><h2 class="wiki-h1"><span class="wiki-h1-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차3-"></a><a href="#목차">3.</a> 성격</h2></summary>
+</details>
+<details open><summary class="text1"><h2 class="wiki-h2"><span class="wiki-h2-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차3-1"></a><a href="#목차">3.1</a> 기본 성향&nbsp;</h2></summary>
+<p class="text1"><span style="font-size: 0.95em;">전반적으로 이타적이며, 자신이 믿는 ‘절대적 선’에 대해서는 다소 우직할 정도로 일관된 태도를 보인다. 불의를 목격할 경우 이를 쉽게 지나치지 못하는 성격으로, 그 과정에서 본인이 입는 피해나 손해에 대해서는 크게 개의치 않는 편이다.</span><div><span style="font-size: 14.44px;"><br></span><p data-start="235" data-end="303">감정 표현이 격하지 않은 타입으로, 분노를 드러내는 경우는 드물며 상황에 관계없이 일정한 온도를 유지하려는 경향이 강하다.</p></div></p>
+</details>
+<details open><summary class="text1"><h2 class="wiki-h2"><span class="wiki-h2-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차3-2"></a><a href="#목차">3.2</a> 태도</h2></summary>
+<p class="text1"><blockquote data-start="323" data-end="522"><p data-start="325" data-end="435">타인에게 기본적으로 온화하고 부드러운 태도를 유지하며, 상대의 상태를 세심하게 살피는 편이다. 상대방을 안정시키는 데 능숙하며, 이를 위해 자신의 감정을 억제하거나 조율하는 모습도 자주 보인다.</p><p data-start="325" data-end="435"><br></p>
+<p data-start="443" data-end="522">한편, 특정 인물에 대해서는 일반적인 관계 이상의 애착과 책임감을 드러내는 경향이 있으며, 이는 가이드로서의 역할과도 밀접하게 연결되어 있다.</p>
+</blockquote></p>
+</details>
+<details open><summary class="text1"><h2 class="wiki-h1"><span class="wiki-h1-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차4-"></a><a href="#목차">4.</a> 주변 인물</h2></summary>
+</details>
+<details open><summary class="text1"><h2 class="wiki-h2"><span class="wiki-h2-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차4-1"></a><a href="#목차">4.1</a> 머스탱 (서재훈)</h2></summary>
+<table class="wiki-quote"><tbody><tr><td class="text1" style="border-left: 5px solid #333333;">그 정도로 놀랄 일인가?</td></tr></tbody></table>
+<p class="text1"><p data-start="131" data-end="174">Fearless 한국지부 소속 S급 센티넬로, 이사월과 전속 파트너 관계를 형성하고 있는 인물.</p><p data-start="131" data-end="174"><br></p>
+<p data-start="182" data-end="302">전투와 통제, 그리고 생존만을 중심으로 살아온 인물로 평가되며, 가이딩에 대해서는 이를 굴욕 혹은 약점 노출로 인식하는 경향이 강하다. 실제로 대부분의 가이드와의 궁합은 극도로 낮은 수준으로 알려져 있다.</p><p data-start="182" data-end="302"><br></p>
+<p data-start="310" data-end="436">이러한 성향에도 불구하고, 이사월과는 예외적으로 안정적인 동기화율을 유지하고 있다. 강한 개입이나 통제를 배제한 채 감각을 완만하게 유도하는 가이딩 방식이, 머스탱의 성향과 충돌하지 않고 유지될 수 있는 요인으로 분석된다.</p><p data-start="310" data-end="436"><br></p>
+<p data-start="444" data-end="552">한편, 머스탱은 이사월을 대함에 있어 통상적인 태도와는 다른 양상을 보이는 경우가 있으며, 이는 명확히 정의되지는 않았으나 일정 수준 이상의 관심 혹은 집착에 가까운 것으로 해석되기도 한다.&nbsp;<span style="font-size: 0.95em;">이사월 역시 머스탱을 첫 페어이자 유일한 가이딩 대상으로 두고 있으며, 이에 대해 가이드로서의 책임감과는 별개로 개인적인 의미를 부여하고 있는 것으로 보인다.</span></p><p data-start="444" data-end="552"><span style="font-size: 0.95em;"><br></span></p>
+<p data-start="658" data-end="749">일각에서는 해당 관계를 단순한 파트너십을 넘어선 것으로 해석하며, 전장 위에서만 존재하던 인물에게 처음으로 ‘일상’에 가까운 변화를 가져온 사례로 평가하기도 한다.</p></p>
+</details>
+<details open><summary class="text1"><h2 class="wiki-h2"><span class="wiki-h2-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차4-2"></a><a href="#목차">4.2</a> 이베르 (이사운)</h2></summary>
+<table class="wiki-quote"><tbody><tr><td class="text1" style="border-left: 5px solid #1a47ff;">ㅇㅇ</td></tr></tbody></table>
+<p class="text1">Fearless 한국지부 소속 S급 센티넬로, 이사월의 형.</p>
+</details>
+<details open><summary class="text1"><h2 class="wiki-h2"><span class="wiki-h2-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차4-3"></a><a href="#목차">4.3</a> 비올레 (백강우)</h2></summary>
+<table class="wiki-quote"><tbody><tr><td class="text1" style="border-left: 5px solid #a225d0;"><br></td></tr></tbody></table>
+<p class="text1"><span style="font-size: 15.2px;">Fearless 한국지부 소속 S급 가이드로,&nbsp;</span></p>
+</details>
+<details open><summary class="text1"><h2 class="wiki-h2"><span class="wiki-h2-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차4-4"></a><a href="#목차">4.4</a> 기타 인물</h2></summary>
+<p class="text1">본문 내용을 입력하세요.</p>
+</details>
+<details open><summary class="text1"><h2 class="wiki-h1"><span class="wiki-h1-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차5-"></a><a href="#목차">5.</a> 행적</h2></summary>
+<table class="text1" style="border-collapse: collapse; width: 100%; border: 1px solid #dddddd;" data-ke-align="alignLeft"><tbody><tr><td style="width: 100%; border: 1px solid gray; border-top: 5px solid orange; padding: 12px;"><span style="font-size: 1.3em;">이 문서에</span> <a style="color: #0275d8; font-size: 1.3em;" href="https://namu.wiki/w/%EC%8A%A4%ED%8F%AC%EC%9D%BC%EB%9F%AC" target="_blank" rel="noopener">스포일러</a><span style="font-size: 1.3em;">가 포함되어 있습니다.</span><br /><br />이 문서가 설명하는 작품이나 인물 등에 대한 줄거리, 결말, 반전 요소 등을 직·간접적으로 포함하고 있습니다.</td></tr></tbody></table>
+</details>
+<details open><summary class="text1"><h2 class="wiki-h2"><span class="wiki-h2-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차5-1"></a><a href="#목차">5.1</a> 과거</h2></summary>
+<p class="text1">본문 내용을 입력하세요.</p>
+</details>
+<details open><summary class="text1"><h2 class="wiki-h2"><span class="wiki-h2-icon"><ion-icon name="chevron-down-outline"></ion-icon></span> <a name="목차5-2"></a><a href="#목차">5.2</a> 주요 사건</h2></summary>
+</details>
+
+
+            <div class="text1 wiki-footnote">
+                <p><a name="각주1"></a><a href="#돌아가기1">[1]</a> S급 센티넬로, 부유 전함 VALKYRIE를 운용하는 단독 전투 특화형 능력자이다.</p>
+<p><a name="각주2"></a><a href="#돌아가기2">[2]</a> </span>16세라는 이른 나이에 능력이 발현된 이후, S급 자질을 지닌 인물로 평가받으며 지부장 K의 보호 및 지도 아래 성장한 것으로 알려져 있다. 이후 23세에 이르러 머스탱과의 페어가 성립되며, 본격적인 전속 가이딩이 시작된 것으로 보인다.<span style="font-size: 0.95em;"></p>
+
+            </div>
+            <script>
+            function openWikiModal(e, el) {
+                if (window.innerWidth >= 768) return; 
+                
+                e.preventDefault(); 
+                
+                const existingOverlay = document.getElementById('wiki-fn-overlay');
+                if (existingOverlay) existingOverlay.remove();
+
+                const tooltipContent = el.querySelector('.wiki-fn-tooltip').innerHTML;
+                
+                const overlay = document.createElement('div');
+                overlay.id = 'wiki-fn-overlay';
+                overlay.className = 'wiki-modal-overlay active';
+                
+                const modal = document.createElement('div');
+                modal.className = 'wiki-modal-box';
+                modal.innerHTML = tooltipContent;
+                
+                overlay.appendChild(modal);
+                document.body.appendChild(overlay);
+                
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === overlay) {
+                        overlay.remove();
+                    }
+                });
+            }
+            </script>
+        </div>
